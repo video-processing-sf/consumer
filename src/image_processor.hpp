@@ -9,7 +9,7 @@ namespace consumer
 class ImageProcessor
 {
 public:
-    ImageProcessor(std::shared_ptr<SharedMemory> shm) : sharedMemory_{shm}
+    ImageProcessor(std::shared_ptr<SharedMemory> shm) : sharedMemory_{shm}, processStream_{true}
     {
         framesStream_ = std::make_shared<cv::VideoCapture>(shm->GetBuffer()->data);
     }
@@ -191,7 +191,7 @@ protected:
 private:
     std::shared_ptr<SharedMemory> sharedMemory_;
     std::shared_ptr<cv::VideoCapture> framesStream_;
-    std::atomic<bool> processStream_ = false;
+    std::atomic<bool> processStream_;
 };
 
 }
